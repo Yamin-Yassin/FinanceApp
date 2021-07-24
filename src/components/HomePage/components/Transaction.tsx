@@ -1,9 +1,12 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {View, Text, Image, StyleSheet, Pressable, Alert} from 'react-native';
+import {View, Text, Image, StyleSheet, Pressable} from 'react-native';
 
 export default function Transaction(props: any) {
+  const nav = useNavigation();
+
   return (
-    <Pressable onPress={() => Alert.alert(props.item.value)}>
+    <Pressable onPress={() => nav.push('Details')}>
       <View style={styles.container}>
         <View style={styles.container}>
           <View>
