@@ -6,7 +6,7 @@ export default function Transaction(props: any) {
   const nav = useNavigation();
 
   return (
-    <Pressable onPress={() => nav.push('Details')}>
+    <Pressable onPress={() => nav.navigate('Details', props.item)}>
       <View style={styles.container}>
         <View style={styles.container}>
           <View>

@@ -8,6 +8,7 @@ import {
   Pressable,
 } from 'react-native';
 import {FlatList, TextInput} from 'react-native-gesture-handler';
+import {event} from 'react-native-reanimated';
 import Transaction from './components/Transaction';
 
 const w = Dimensions.get('window').width;
@@ -22,54 +23,81 @@ export const HomePage = () => {
   const [transaction, setTransaction] = useState([
     {
       id: 0,
-      name: 'yamin',
-      date: '10/07/2002',
-      value: '+100,00',
-      description: 'Transferencia para a minha mamãe Linda',
+      name: 'Bolt Payment',
+      date: '21/07/2021',
+      value: '-2,00',
+      description: 'Payment for bolt ride on scooter',
     },
     {
       id: 1,
-      name: 'yamin',
-      date: '10/07/2002',
-      value: '+100,00',
-      description: 'Transferencia para a minha mamãe Linda',
+      name: 'Transf. Condomínio',
+      date: '20/07/2021',
+      value: '-100,00',
+      description: 'Pagamento do condominio',
     },
     {
       id: 2,
-      name: 'yamin',
-      date: '10/07/2002',
-      value: '+100,00',
-      description: 'Transferencia para a minha mamãe Linda',
+      name: 'Ordenado Mensal',
+      date: '10/07/2021',
+      value: '+1000,00',
+      description: 'ESTAS RICOOO FILHOOO',
     },
     {
       id: 3,
-      name: 'yamin',
-      date: '10/07/2002',
-      value: '+100,00',
-      description: 'Transferencia para a minha mamãe Linda',
+      name: 'Trans. MBWay José',
+      date: '10/05/2021',
+      value: '-5,00',
+      description: 'Jantar',
     },
     {
       id: 4,
-      name: 'yamin',
-      date: '10/07/2002',
-      value: '+100,00',
-      description: 'Transferencia para a minha mamãe Linda',
+      name: 'Uber Ride',
+      date: '3/01/2021',
+      value: '-50,00',
+      description: 'Payment for the ride hailing service',
     },
     {
       id: 5,
-      name: 'yamin',
+      name: 'Pagamento ISEL',
       date: '10/07/2002',
-      value: '+100,00',
-      description: 'Transferencia para a minha mamãe Linda',
-    },
-    {
-      id: 6,
-      name: 'yamin',
-      date: '10/07/2002',
-      value: '+100,00',
-      description: 'Transferencia para a minha mamãe Linda',
+      value: '-67.97',
+      description: 'Pagamento das propinas',
     },
   ]);
+
+  const handleChange = event => {
+    switch (event.target.name) {
+      case 'name':
+        console.log(event.target);
+        break;
+      case 'date':
+        break;
+      case 'description':
+        break;
+      case 'value':
+        break;
+      default:
+        break;
+    }
+  };
+
+  /* const addTransaction = (
+    name: string,
+    date: string,
+    value: string,
+    description: string,
+  ) => {
+    const newTransaction = {
+      id: transaction[transaction.length - 1].id,
+      name: name,
+      date: date,
+      value: value,
+      description: description,
+    };
+
+    setTransaction([...transaction, newTransaction] );
+  };
+ */
 
   return (
     <View style={styles.container}>
@@ -116,6 +144,7 @@ export const HomePage = () => {
           <TextInput
             style={[styles.inputContainer, styles.transName]}
             placeholder="Transaction name"
+            accessible
           />
           <TextInput
             style={[styles.inputContainer, styles.transDate]}
@@ -134,6 +163,7 @@ export const HomePage = () => {
 
         <View style={[styles.transContainer]}>
           <TextInput
+            keyboardType="numbers-and-punctuation"
             style={[styles.inputContainer, styles.transValue]}
             placeholder="€ Value"
           />

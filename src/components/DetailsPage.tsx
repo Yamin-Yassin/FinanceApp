@@ -1,7 +1,13 @@
+import {useRoute} from '@react-navigation/native';
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 
 export const DetailsPage = () => {
+  const route = useRoute();
+
+  const item = route.params;
+
+  console.log(item);
   return (
     <View style={styles.container}>
       <View style={[styles.balanceContainer]}>
@@ -14,13 +20,13 @@ export const DetailsPage = () => {
           <Text style={[styles.section]}>Amount</Text>
 
           <View style={styles.amountContainer}>
-            <Text style={[styles.amount]}>+1.000,00 </Text>
-            <Text style={[styles.currency]}>EUR</Text>
+            <Text style={[styles.amount]}>{item.value}</Text>
+            <Text style={[styles.currency]}> EUR</Text>
           </View>
         </View>
 
         <View>
-          <Text style={[styles.textName]}>Trans. Name 1</Text>
+          <Text style={[styles.textName]}>{item.name}</Text>
         </View>
       </View>
 
@@ -28,14 +34,12 @@ export const DetailsPage = () => {
         <View style={[styles.section]}>
           <Text>Description</Text>
         </View>
-        <Text style={[styles.textName]}>
-          aisjdoiasjosakdpoaskpodkaspokdposakdpoaskpodkaspodkpaoskdopask
-        </Text>
+        <Text style={[styles.textName]}>{item.description}</Text>
 
         <View style={[styles.section]}>
           <Text>Transaction Date:</Text>
         </View>
-        <Text style={[styles.textName]}>10/07/2021</Text>
+        <Text style={[styles.textName]}>{item.date}</Text>
       </View>
     </View>
   );
