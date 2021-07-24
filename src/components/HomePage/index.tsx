@@ -1,17 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   StyleSheet,
   Text,
   Image,
-  TouchableOpacity,
   Dimensions,
+  Pressable,
 } from 'react-native';
-import {ScrollView, TextInput} from 'react-native-gesture-handler';
+import {FlatList, TextInput} from 'react-native-gesture-handler';
 import Transaction from './components/Transaction';
 
 const w = Dimensions.get('window').width;
-const h = Dimensions.get('window').height;
 
 export const HomePage = () => {
   const user = {
@@ -19,6 +18,58 @@ export const HomePage = () => {
     avatar: require('../../assets/avatar.jpeg'),
     balance: '+100.000,00',
   };
+
+  const [transaction, setTransaction] = useState([
+    {
+      id: 0,
+      name: 'yamin',
+      date: '10/07/2002',
+      value: '+100,00',
+      description: 'Transferencia para a minha mamãe Linda',
+    },
+    {
+      id: 1,
+      name: 'yamin',
+      date: '10/07/2002',
+      value: '+100,00',
+      description: 'Transferencia para a minha mamãe Linda',
+    },
+    {
+      id: 2,
+      name: 'yamin',
+      date: '10/07/2002',
+      value: '+100,00',
+      description: 'Transferencia para a minha mamãe Linda',
+    },
+    {
+      id: 3,
+      name: 'yamin',
+      date: '10/07/2002',
+      value: '+100,00',
+      description: 'Transferencia para a minha mamãe Linda',
+    },
+    {
+      id: 4,
+      name: 'yamin',
+      date: '10/07/2002',
+      value: '+100,00',
+      description: 'Transferencia para a minha mamãe Linda',
+    },
+    {
+      id: 5,
+      name: 'yamin',
+      date: '10/07/2002',
+      value: '+100,00',
+      description: 'Transferencia para a minha mamãe Linda',
+    },
+    {
+      id: 6,
+      name: 'yamin',
+      date: '10/07/2002',
+      value: '+100,00',
+      description: 'Transferencia para a minha mamãe Linda',
+    },
+  ]);
 
   return (
     <View style={styles.container}>
@@ -44,17 +95,15 @@ export const HomePage = () => {
       </View>
 
       {/* ------ Transaction List -------*/}
-
       <View>
         <Text> Filter by: </Text>
       </View>
 
-      <ScrollView style={[styles.transListContainer]}>
-        <Transaction />
-        <Transaction />
-        <Transaction />
-        <Transaction />
-      </ScrollView>
+      <FlatList
+        style={styles.transListContainer}
+        data={transaction}
+        renderItem={({item}) => <Transaction item={item} />}
+      />
 
       {/* ------ Text inputs -------*/}
 
@@ -78,6 +127,8 @@ export const HomePage = () => {
           <TextInput
             style={[styles.inputContainer, styles.transDescr]}
             placeholder="Transaction description"
+            multiline={true}
+            textAlignVertical="center"
           />
         </View>
 
@@ -86,9 +137,9 @@ export const HomePage = () => {
             style={[styles.inputContainer, styles.transValue]}
             placeholder="€ Value"
           />
-          <TouchableOpacity style={styles.button}>
+          <Pressable style={styles.button}>
             <Text>Add</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
     </View>
@@ -97,8 +148,8 @@ export const HomePage = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 35,
     paddingHorizontal: 14,
+    paddingTop: 5,
   },
 
   avatar: {
@@ -131,7 +182,7 @@ const styles = StyleSheet.create({
   },
 
   transListContainer: {
-    padding: 10,
+    height: 250,
   },
 
   inputContainer: {

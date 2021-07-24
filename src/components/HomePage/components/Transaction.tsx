@@ -1,26 +1,28 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, Pressable, Alert} from 'react-native';
 
-export default function Transaction() {
+export default function Transaction(props: any) {
   return (
-    <View style={styles.container}>
+    <Pressable onPress={() => Alert.alert(props.item.value)}>
       <View style={styles.container}>
-        <View>
-          <Image
-            source={require('../../../assets/transLogo.png')}
-            style={styles.avatar}
-          />
+        <View style={styles.container}>
+          <View>
+            <Image
+              source={require('../../../assets/transLogo.png')}
+              style={styles.avatar}
+            />
+          </View>
+          <View style={styles.transName}>
+            <Text>{props.item.name}</Text>
+            <Text>{props.item.date}</Text>
+          </View>
         </View>
-        <View style={styles.transName}>
-          <Text>Trans. Name</Text>
-          <Text>- Date</Text>
-        </View>
-      </View>
 
-      <View>
-        <Text> +0.000,00</Text>
+        <View>
+          <Text>{props.item.value}</Text>
+        </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
 

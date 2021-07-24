@@ -5,13 +5,31 @@ import {StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {HomePage} from './components/HomePage';
+import {DetailsPage} from './components/DetailsPage';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {LoginPage} from './components/LoginPage';
+import {useState} from 'react';
+
+const Stack = createStackNavigator();
 
 const App = () => {
-  //const [SignedIn, setSignedIn] = useState(false);
+  const [SignedIn, setSignedIn] = useState(true);
 
   return (
     <SafeAreaView style={styles.container}>
-      <HomePage />
+      <NavigationContainer>
+        <Stack.Navigator>
+          {SignedIn ? (
+            <>
+              <Stack.Screen name="Home" component={HomePage} />
+              <Stack.Screen name="Details" component={DetailsPage} />
+            </>
+          ) : (
+            <Stack.Screen name="Login" component={LoginPage} />
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
     </SafeAreaView>
   );
 };
