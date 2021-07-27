@@ -8,7 +8,6 @@ import {
   Pressable,
 } from 'react-native';
 import {FlatList, TextInput} from 'react-native-gesture-handler';
-import {event} from 'react-native-reanimated';
 import Transaction from './components/Transaction';
 
 const w = Dimensions.get('window').width;
@@ -17,7 +16,7 @@ export const HomePage = () => {
   const user = {
     name: 'Yamin Yassin',
     avatar: require('../../assets/avatar.jpeg'),
-    balance: '+100.000,00',
+    balance: '1000,00',
   };
 
   const [transaction, setTransaction] = useState([
@@ -134,44 +133,6 @@ export const HomePage = () => {
       />
 
       {/* ------ Text inputs -------*/}
-
-      <View>
-        <Text style={[styles.welcomeText, styles.containerUser]}>
-          Add a new transaction
-        </Text>
-
-        <View style={[styles.transContainer]}>
-          <TextInput
-            style={[styles.inputContainer, styles.transName]}
-            placeholder="Transaction name"
-            accessible
-          />
-          <TextInput
-            style={[styles.inputContainer, styles.transDate]}
-            placeholder="Transaction date"
-          />
-        </View>
-
-        <View style={[styles.transContainer]}>
-          <TextInput
-            style={[styles.inputContainer, styles.transDescr]}
-            placeholder="Transaction description"
-            multiline={true}
-            textAlignVertical="center"
-          />
-        </View>
-
-        <View style={[styles.transContainer]}>
-          <TextInput
-            keyboardType="numbers-and-punctuation"
-            style={[styles.inputContainer, styles.transValue]}
-            placeholder="€ Value"
-          />
-          <Pressable style={styles.button}>
-            <Text>Add</Text>
-          </Pressable>
-        </View>
-      </View>
     </View>
   );
 };
