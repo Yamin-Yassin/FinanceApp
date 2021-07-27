@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {
   View,
   StyleSheet,
@@ -7,8 +7,9 @@ import {
   Dimensions,
   Pressable,
 } from 'react-native';
-import {FlatList, TextInput} from 'react-native-gesture-handler';
+import {FlatList} from 'react-native-gesture-handler';
 import Transaction from './components/Transaction';
+import {TransactionPopup} from './components/TransactionPopup';
 
 const w = Dimensions.get('window').width;
 
@@ -19,6 +20,7 @@ export const HomePage = () => {
     balance: '1000,00',
   };
 
+  const Popup = useRef(null);
   const [transaction, setTransaction] = useState([
     {
       id: 0,
@@ -64,39 +66,9 @@ export const HomePage = () => {
     },
   ]);
 
-  const handleChange = event => {
-    switch (event.target.name) {
-      case 'name':
-        console.log(event.target);
-        break;
-      case 'date':
-        break;
-      case 'description':
-        break;
-      case 'value':
-        break;
-      default:
-        break;
-    }
+  const onShowPopup = () => {
+    Popup.show();
   };
-
-  /* const addTransaction = (
-    name: string,
-    date: string,
-    value: string,
-    description: string,
-  ) => {
-    const newTransaction = {
-      id: transaction[transaction.length - 1].id,
-      name: name,
-      date: date,
-      value: value,
-      description: description,
-    };
-
-    setTransaction([...transaction, newTransaction] );
-  };
- */
 
   return (
     <View style={styles.container}>
@@ -133,6 +105,11 @@ export const HomePage = () => {
       />
 
       {/* ------ Text inputs -------*/}
+      <Pressable style={[styles.button]} onPress={onShowPopup}>
+        <Text>Make a Transaction</Text>
+      </Pressable>
+
+      <TransactionPopup ref={target => (Popup = target)} />
     </View>
   );
 };
@@ -207,6 +184,7 @@ const styles = StyleSheet.create({
   },
 
   button: {
+    marginVertical: 20,
     paddingVertical: 15,
     alignItems: 'center',
     backgroundColor: '#E6E6FA',
