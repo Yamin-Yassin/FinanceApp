@@ -20,7 +20,13 @@ export const HomePage = () => {
     balance: '1000,00',
   };
 
-  const Popup = useRef(null);
+  //vars e funcs do Popup
+  /*   const popupRef = useRef(null);
+  const onShowPopup = () => {
+    console.log(popupRef);
+  };
+  const onClosePopup = () => console.log(popupRef);
+ */
   const [transaction, setTransaction] = useState([
     {
       id: 0,
@@ -66,10 +72,6 @@ export const HomePage = () => {
     },
   ]);
 
-  const onShowPopup = () => {
-    Popup.show();
-  };
-
   return (
     <View style={styles.container}>
       <View style={[styles.containerUser]}>
@@ -105,11 +107,12 @@ export const HomePage = () => {
       />
 
       {/* ------ Text inputs -------*/}
-      <Pressable style={[styles.button]} onPress={onShowPopup}>
-        <Text>Make a Transaction</Text>
+      {/* <Pressable style={[styles.button]} onPress={onShowPopup}>
+        <Text>Show PopUp</Text>
       </Pressable>
-
-      <TransactionPopup ref={target => (Popup = target)} />
+      <View>
+        <TransactionPopup ref={popupRef} onTouchOutside={onClosePopup} />
+      </View> */}
     </View>
   );
 };

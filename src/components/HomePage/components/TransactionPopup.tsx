@@ -1,16 +1,21 @@
 import React, {useState} from 'react';
+import {forwardRef} from 'react';
 import {
   View,
   Text,
   Modal,
   Pressable,
+  Dimensions,
   StyleSheet,
   TextInput,
-  TouchableWithoutFeedback,
 } from 'react-native';
 
-export const TransactionPopup = (props: any, ref: any) => {
+const height = Dimensions.get('window').height;
+
+export const TransactionPopup = forwardRef((props: any, ref: any) => {
   const [visable, setVisable] = useState(false);
+
+  const {onTouchOutside} = props;
 
   const show = () => {
     setVisable(true);
@@ -19,72 +24,70 @@ export const TransactionPopup = (props: any, ref: any) => {
     setVisable(false);
   };
 
-  const renderOutsidePressable = onTouch => {
-    const view = <View style={{flex: 1, width: '100%'}} />;
+  const renderOutside = (onTouch: any) => {
+    const view = <View style={styles.viewOutside} />;
 
-    if (onTouch) return view;
+    if (!onTouch) {
+      return view;
+    }
 
     return (
-      <TouchableWithoutFeedback
-        onPress={onTouch}
-        style={{flex: 1, width: '100%'}}>
+      <Pressable onPress={onTouch} style={styles.viewOutside}>
         {view}
-      </TouchableWithoutFeedback>
+      </Pressable>
     );
   };
+
   return (
-    <View>
-      <Modal
-        animationType={'slide'}
-        transparent={true}
-        visible={visable}
-        onRequestClose={close}>
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: 'coral',
-            justifyContent: 'flex-end',
-          }}>
-          <Text style={[styles.welcomeText, styles.containerUser]}>
-            Add a new transaction
-          </Text>
-
-          <View style={[styles.transContainer]}>
-            <TextInput
-              style={[styles.inputContainer, styles.transName]}
-              placeholder="Transaction name"
-              accessible
-            />
-            <TextInput
-              style={[styles.inputContainer, styles.transDate]}
-              placeholder="Transaction date"
-            />
-          </View>
-
-          <View style={[styles.transContainer]}>
-            <TextInput
-              style={[styles.inputContainer, styles.transDescr]}
-              placeholder="Transaction description"
-              multiline={true}
-              textAlignVertical="center"
-            />
-          </View>
-
-          <View style={[styles.transContainer]}>
-            <TextInput
-              keyboardType="numbers-and-punctuation"
-              style={[styles.inputContainer, styles.transValue]}
-              placeholder="€ Value"
-            />
-            <Pressable style={styles.button}>
-              <Text>Add</Text>
-            </Pressable>
+    <Modal
+      ref={ref}
+      animationType={'slide'}
+      presentationStyle={'overFullScreen'}
+      transparent={true}
+      visible={visable}
+      onRequestClose={close}>
+      <View style={styles.formView}>
+        {renderOutside(onTouchOutside)}
+        <View style={styles.viewInside}>
+          <View>
+            <Text>OLA POPUP</Text>
           </View>
         </View>
-      </Modal>
-    </View>
+        {/*  <View style={[styles.transContainer]}>
+          <TextInput
+            style={[styles.inputContainer, styles.transName]}
+            placeholder="Transaction name"
+            accessible
+          />
+          <TextInput
+            style={[styles.inputContainer, styles.transDate]}
+            placeholder="Transaction date"
+          />
+        </View>
+
+        <View style={[styles.transContainer]}>
+          <TextInput
+            style={[styles.inputContainer, styles.transDescr]}
+            placeholder="Transaction description"
+            multiline={true}
+            textAlignVertical="center"
+          />
+        </View>
+
+        <View style={[styles.transContainer]}>
+          <TextInput
+            keyboardType="numbers-and-punctuation"
+            style={[styles.inputContainer, styles.transValue]}
+            placeholder="€ Value"
+          />
+          <Pressable style={styles.button}>
+            <Text>Add</Text>
+          </Pressable>
+        </View> */}
+      </View>
+    </Modal>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -147,7 +150,7 @@ const styles = StyleSheet.create({
   },
 
   transDescr: {
-    paddingHorizontal: w - 250,
+    //paddingHorizontal: w - 250,
     paddingVertical: 30,
   },
 
@@ -161,5 +164,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#E6E6FA',
     borderRadius: 20,
     paddingHorizontal: 60,
+  },
+
+  formView: {
+    flex: 1,
+    backgroundColor: 'coral',
+    justifyContent: 'flex-end',
+  },
+
+  viewOutside: {
+    flex: 1,
+    width: '100%',
+  },
+  viewInside: {
+    backgroundColor: '#ffffff',
+    width: '100%',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    paddingHorizontal: 10,
+    maxHeight: height * 0.4,
   },
 });
