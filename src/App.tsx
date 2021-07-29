@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
@@ -9,7 +9,6 @@ import {DetailsPage} from './components/DetailsPage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {LoginPage} from './components/LoginPage';
-import {useState} from 'react';
 
 const Stack = createStackNavigator();
 

@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import Transaction from './components/Transaction';
-import {TransactionPopup} from './components/TransactionPopup';
 
 const w = Dimensions.get('window').width;
 
@@ -20,13 +19,6 @@ export const HomePage = () => {
     balance: '1000,00',
   };
 
-  //vars e funcs do Popup
-  /*   const popupRef = useRef(null);
-  const onShowPopup = () => {
-    console.log(popupRef);
-  };
-  const onClosePopup = () => console.log(popupRef);
- */
   const [transaction, setTransaction] = useState([
     {
       id: 0,
@@ -107,12 +99,9 @@ export const HomePage = () => {
       />
 
       {/* ------ Text inputs -------*/}
-      {/* <Pressable style={[styles.button]} onPress={onShowPopup}>
+      <Pressable style={[styles.button]}>
         <Text>Show PopUp</Text>
       </Pressable>
-      <View>
-        <TransactionPopup ref={popupRef} onTouchOutside={onClosePopup} />
-      </View> */}
     </View>
   );
 };
