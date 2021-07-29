@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -8,6 +8,7 @@ import {
   Pressable,
 } from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
+import {useSelector, useDispatch} from 'react-redux';
 import Transaction from './components/Transaction';
 
 const w = Dimensions.get('window').width;
@@ -18,6 +19,11 @@ export const HomePage = () => {
     avatar: require('../../assets/avatar.jpeg'),
     balance: '1000,00',
   };
+
+  const reduxState = useSelector(state => state);
+  console.log(reduxState);
+
+  const dispatch = useDispatch();
 
   const [transaction, setTransaction] = useState([
     {

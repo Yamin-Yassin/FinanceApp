@@ -1,32 +1,34 @@
-enum ActionType {
-  Add = 'add',
-  Remove = 'remove',
-}
-
-interface AddAction {
-  type: ActionType.Add;
-  payload: number;
-}
-
-interface RemoveAction {
-  type: ActionType.Remove;
-  payload: number;
-}
-
-type Action = AddAction | RemoveAction;
+import {Action, ActionEnum} from './types';
 
 const initState = {
   balance: 1000,
 };
 
-const transactionReducer = (action: Action, state = initState) => {
+/* export enum ActionEnum {
+  Add = 'add',
+  Remove = 'remove',
+}
+
+interface AddAction {
+  type: ActionEnum.Add;
+  payload: number;
+}
+
+interface RemoveAction {
+  type: ActionEnum.Remove;
+  payload: number;
+}
+
+export type Action = AddAction | RemoveAction; */
+
+const transactionReducer = (state = initState, action: Action) => {
   switch (action.type) {
-    case ActionType.Add:
+    case ActionEnum.Add:
       return {
         ...state,
         balance: state.balance + action.payload,
       };
-    case ActionType.Remove:
+    case ActionEnum.Remove:
       return {
         ...state,
         balance: state.balance - action.payload,
