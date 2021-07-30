@@ -9,8 +9,10 @@ import {
 } from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {useSelector, useDispatch} from 'react-redux';
-import Transaction from './components/Transaction';
 
+import Transaction from './components/Transaction';
+import {ReduxStateType} from '../../store/root.reducer';
+import {useNavigation} from '@react-navigation/native';
 const w = Dimensions.get('window').width;
 
 export const HomePage = () => {
@@ -20,55 +22,10 @@ export const HomePage = () => {
     balance: '1000,00',
   };
 
-  const reduxState = useSelector(state => state);
+  const nav = useNavigation();
+
+  const reduxState = useSelector((state: ReduxStateType) => state.balance);
   console.log(reduxState);
-
-  const dispatch = useDispatch();
-
-  const [transaction, setTransaction] = useState([
-    {
-      id: 0,
-      name: 'Bolt Payment',
-      date: '21/07/2021',
-      value: '-2,00',
-      description: 'Payment for bolt ride on scooter',
-    },
-    {
-      id: 1,
-      name: 'Transf. Condomínio',
-      date: '20/07/2021',
-      value: '-100,00',
-      description: 'Pagamento do condominio',
-    },
-    {
-      id: 2,
-      name: 'Ordenado Mensal',
-      date: '10/07/2021',
-      value: '+1000,00',
-      description: 'ESTAS RICOOO FILHOOO',
-    },
-    {
-      id: 3,
-      name: 'Trans. MBWay José',
-      date: '10/05/2021',
-      value: '-5,00',
-      description: 'Jantar',
-    },
-    {
-      id: 4,
-      name: 'Uber Ride',
-      date: '3/01/2021',
-      value: '-50,00',
-      description: 'Payment for the ride hailing service',
-    },
-    {
-      id: 5,
-      name: 'Pagamento ISEL',
-      date: '10/07/2002',
-      value: '-67.97',
-      description: 'Pagamento das propinas',
-    },
-  ]);
 
   return (
     <View style={styles.container}>
@@ -89,7 +46,7 @@ export const HomePage = () => {
           <Text style={[styles.welcomeText]}>Account Balance:</Text>
         </View>
         <View>
-          <Text style={[styles.welcomeText]}>{user.balance}</Text>
+          <Text style={[styles.welcomeText]}>{reduxState.balance}</Text>
         </View>
       </View>
 
@@ -100,13 +57,16 @@ export const HomePage = () => {
 
       <FlatList
         style={styles.transListContainer}
-        data={transaction}
+        data={reduxState.transactions}
+        keyExtractor={item => item.value}
         renderItem={({item}) => <Transaction item={item} />}
       />
 
       {/* ------ Text inputs -------*/}
-      <Pressable style={[styles.button]}>
-        <Text>Show PopUp</Text>
+      <Pressable
+        style={[styles.button]}
+        onPress={() => nav.navigate('Transaction')}>
+        <Text>Ask for Payment</Text>
       </Pressable>
     </View>
   );

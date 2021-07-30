@@ -5,12 +5,29 @@ export enum ActionEnum {
 
 interface AddAction {
   type: ActionEnum.Add;
-  payload: number;
+  payload: {
+    name: string;
+    date: string;
+    description: string;
+    value: number;
+  };
 }
 
 interface RemoveAction {
   type: ActionEnum.Remove;
-  payload: number;
+  payload: {
+    name: string;
+    date: string;
+    description: string;
+    value: number;
+  };
 }
 
+export type TransactionType = {
+  id: number;
+  name: string;
+  date: string;
+  description: string;
+  value: number;
+};
 export type Action = AddAction | RemoveAction;

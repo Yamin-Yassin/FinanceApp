@@ -1,19 +1,12 @@
 import React, {useState} from 'react';
 import {forwardRef} from 'react';
-import {
-  View,
-  Text,
-  Modal,
-  Pressable,
-  Dimensions,
-  StyleSheet,
-  TextInput,
-} from 'react-native';
+import {View, Text, Pressable, StyleSheet, TextInput} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as actionCreators from '../../../store/expenses/actions';
 
-const height = Dimensions.get('window').height;
-
-export const TransactionPopup = forwardRef((props: any, ref: any) => {
-  const [visable, setVisable] = useState(false);
+export const TransactionPopup = () => {
+  /* const [visable, setVisable] = useState(false);
 
   const {onTouchOutside} = props;
 
@@ -36,32 +29,40 @@ export const TransactionPopup = forwardRef((props: any, ref: any) => {
         {view}
       </Pressable>
     );
+  }; */
+
+  const dispatch = useDispatch();
+  const {addTransaction} = bindActionCreators(actionCreators, dispatch);
+
+  const [name, setName] = useState('');
+  const [date, setDate] = useState('');
+  const [description, setDescription] = useState('');
+  const [amount, setAmount] = useState('');
+
+  const DispatchAction = () => {
+    addTransaction(name, date, description, +amount);
   };
 
   return (
-    <Modal
-      ref={ref}
-      animationType={'slide'}
-      presentationStyle={'overFullScreen'}
-      transparent={true}
-      visible={visable}
-      onRequestClose={close}>
-      <View style={styles.formView}>
-        {renderOutside(onTouchOutside)}
-        <View style={styles.viewInside}>
-          <View>
-            <Text>OLA POPUP</Text>
-          </View>
+    <>
+      <View style={styles.container}>
+        <View style={styles.welcomeName}>
+          <Text style={[styles.welcomeText, styles.containerUser]}>
+            Add a new transaction
+          </Text>
         </View>
-        {/*  <View style={[styles.transContainer]}>
+        <View style={[styles.transContainer]}>
           <TextInput
             style={[styles.inputContainer, styles.transName]}
             placeholder="Transaction name"
-            accessible
+            onChangeText={setName}
+            value={name}
           />
           <TextInput
             style={[styles.inputContainer, styles.transDate]}
             placeholder="Transaction date"
+            onChangeText={setDate}
+            value={date}
           />
         </View>
 
@@ -71,28 +72,34 @@ export const TransactionPopup = forwardRef((props: any, ref: any) => {
             placeholder="Transaction description"
             multiline={true}
             textAlignVertical="center"
+            onChangeText={setDescription}
+            value={description}
           />
         </View>
 
         <View style={[styles.transContainer]}>
           <TextInput
-            keyboardType="numbers-and-punctuation"
+            keyboardType="number-pad"
             style={[styles.inputContainer, styles.transValue]}
             placeholder="€ Value"
+            onChangeText={setAmount}
+            value={amount}
           />
-          <Pressable style={styles.button}>
-            <Text>Add</Text>
-          </Pressable>
-        </View> */}
+        </View>
+        <Pressable style={styles.button} onPress={() => DispatchAction()}>
+          <Text>Add</Text>
+        </Pressable>
       </View>
-    </Modal>
+    </>
   );
-});
+};
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 14,
+    paddingHorizontal: 12,
     paddingTop: 5,
+    height: '100%',
+    marginTop: '50%',
   },
 
   avatar: {
@@ -108,7 +115,8 @@ const styles = StyleSheet.create({
 
   welcomeName: {
     opacity: 0.8,
-    paddingStart: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   containerUser: {
@@ -150,38 +158,21 @@ const styles = StyleSheet.create({
   },
 
   transDescr: {
-    //paddingHorizontal: w - 250,
+    paddingHorizontal: 100,
     paddingVertical: 30,
   },
 
   transValue: {
-    paddingHorizontal: 60,
+    paddingHorizontal: 150,
+    paddingVertical: 10,
   },
 
   button: {
+    marginVertical: 50,
     paddingVertical: 15,
     alignItems: 'center',
     backgroundColor: '#E6E6FA',
     borderRadius: 20,
     paddingHorizontal: 60,
-  },
-
-  formView: {
-    flex: 1,
-    backgroundColor: 'coral',
-    justifyContent: 'flex-end',
-  },
-
-  viewOutside: {
-    flex: 1,
-    width: '100%',
-  },
-  viewInside: {
-    backgroundColor: '#ffffff',
-    width: '100%',
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    paddingHorizontal: 10,
-    maxHeight: height * 0.4,
   },
 });
