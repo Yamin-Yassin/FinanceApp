@@ -22,6 +22,7 @@ interface RemoveAction {
     value: number;
   };
 }
+export type Action = AddAction | RemoveAction;
 
 export type TransactionType = {
   id: number;
@@ -30,4 +31,3 @@ export type TransactionType = {
   description: string;
   value: number;
 };
-export type Action = AddAction | RemoveAction;

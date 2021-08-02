@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   View,
   StyleSheet,
@@ -8,7 +8,7 @@ import {
   Pressable,
 } from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 import Transaction from './components/Transaction';
 import {ReduxStateType} from '../../store/root.reducer';
@@ -27,6 +27,7 @@ export const HomePage = () => {
   const reduxState = useSelector((state: ReduxStateType) => state.balance);
   console.log(reduxState);
 
+  // nao consigo remover os erros dentro quando uso o reduxState
   return (
     <View style={styles.container}>
       <View style={[styles.containerUser]}>
