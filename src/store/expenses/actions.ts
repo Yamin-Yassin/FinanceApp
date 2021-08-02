@@ -1,7 +1,8 @@
-import {Action, ActionEnum} from './types';
+import {Action, ActionEnum, ActionPayload} from './types';
 import {Dispatch} from 'redux';
+import {createAction} from 'typesafe-actions';
 
-export const addTransaction = (
+/* export const addTransaction = (
   name: string,
   date: string,
   description: string,
@@ -38,3 +39,24 @@ export const removeTransaction = (
     });
   };
 };
+ */
+
+export const addTransaction = createAction(
+  ActionEnum.Add,
+  (name: string, date: string, description: string, value: number) => ({
+    name,
+    date,
+    description,
+    value,
+  }),
+)<ActionPayload>();
+
+export const removeTransaction = createAction(
+  ActionEnum.Remove,
+  (name: string, date: string, description: string, value: number) => ({
+    name,
+    date,
+    description,
+    value,
+  }),
+)<ActionPayload>();

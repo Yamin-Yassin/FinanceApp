@@ -3,6 +3,13 @@ export enum ActionEnum {
   Remove = 'remove',
 }
 
+export type ActionPayload = {
+  name: string;
+  date: string;
+  description: string;
+  value: number;
+};
+
 interface AddAction {
   type: ActionEnum.Add;
   payload: {

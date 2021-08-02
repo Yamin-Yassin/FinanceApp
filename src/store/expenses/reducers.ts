@@ -1,4 +1,6 @@
-import {Action, ActionEnum} from './types';
+import {ActionType, getType} from 'typesafe-actions';
+import {ActionEnum} from './types';
+import * as transactionActions from './actions';
 
 const initState = {
   name: 'Yamin Yassin',
@@ -7,15 +9,18 @@ const initState = {
   transactions: [],
 };
 
-const transactionReducer = (state = initState, action: Action) => {
+const transactionReducer = (
+  state = initState,
+  action: ActionType<typeof transactionActions>,
+) => {
   switch (action.type) {
-    case ActionEnum.Add:
+    case getType(transactionActions.addTransaction):
       return {
         ...state,
         balance: state.balance + action.payload.value,
         transactions: [...state.transactions, action.payload],
       };
-    case ActionEnum.Remove:
+    case getType(transactionActions.removeTransaction):
       return {
         ...state,
         balance: state.balance - action.payload.value,
@@ -25,5 +30,13 @@ const transactionReducer = (state = initState, action: Action) => {
       return state;
   }
 };
+
+/* const transactionReducer = createReducer(initState).handleAction(
+  ActionEnum.Add, (state, action) => {
+    state,
+    balance: state.balance + action.payload.value,
+    transactions: [...state.transactions, action.payload],
+  };
+); */
 
 export default transactionReducer;
