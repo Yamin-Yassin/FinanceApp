@@ -1,36 +1,10 @@
 import React, {useState} from 'react';
-import {forwardRef} from 'react';
 import {View, Text, Pressable, StyleSheet, TextInput} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actionCreators from '../../../store/expenses/actions';
 
 export const TransactionPopup = () => {
-  /* const [visable, setVisable] = useState(false);
-
-  const {onTouchOutside} = props;
-
-  const show = () => {
-    setVisable(true);
-  };
-  const close = () => {
-    setVisable(false);
-  };
-
-  const renderOutside = (onTouch: any) => {
-    const view = <View style={styles.viewOutside} />;
-
-    if (!onTouch) {
-      return view;
-    }
-
-    return (
-      <Pressable onPress={onTouch} style={styles.viewOutside}>
-        {view}
-      </Pressable>
-    );
-  }; */
-
   const dispatch = useDispatch();
   const {addTransaction} = bindActionCreators(actionCreators, dispatch);
 

@@ -1,5 +1,4 @@
 import {ActionType, getType} from 'typesafe-actions';
-import {ActionEnum} from './types';
 import * as transactionActions from './actions';
 
 const initState = {
