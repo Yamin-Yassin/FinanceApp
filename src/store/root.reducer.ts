@@ -1,11 +1,12 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
-import thunk from 'redux-thunk';
+import createSagaMiddleware from '@redux-saga/core';
 import transactionReducer from './expenses/reducers';
 
 const reducers = combineReducers({
   balance: transactionReducer,
 });
 
-export const store = createStore(reducers, {}, applyMiddleware(thunk));
+const sagaMiddleware = createSagaMiddleware();
+export const store = createStore(reducers, {}, applyMiddleware(sagaMiddleware));
 
 export type ReduxStateType = ReturnType<typeof reducers>;
