@@ -14,7 +14,7 @@ function* addUserSaga(
 ): Generator {
   try {
     const response: any = yield call(getUsers, action.payload);
-
+    console.log('sagas ', response);
     yield put(fetchUsersAsync.success(response));
   } catch (err) {
     yield put(fetchUsersAsync.failure(err));
@@ -32,3 +32,5 @@ export const userReducer = createReducer({}).handleAction(
   fetchUsersAsync.success,
   (state: any, action: any) => ({...state, users: action.payload}),
 );
+
+export type ReduxStateType = ReturnType<typeof userReducer>;
