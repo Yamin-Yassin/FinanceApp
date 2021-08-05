@@ -8,10 +8,10 @@ import {
   Pressable,
 } from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
-import {useSelector} from 'react-redux';
 
 import Transaction from './components/Transaction';
 import {useNavigation} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
 const w = Dimensions.get('window').width;
 
 export const HomePage = () => {

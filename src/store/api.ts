@@ -1,12 +1,11 @@
-export const fetchAccounts = async () => {
+export const getUsers: any = async () => {
   try {
-    const response = await fetch(
+    const res = await fetch(
       'https://dx-bootcamp-api.azurewebsites.net/api/Accounts',
     );
-    const data = await response.json();
-    console.log(data);
-    return data;
-  } catch (error) {
-    console.error(error);
+    return await res.json();
+  } catch (err) {
+    console.log('api', err);
+    throw err;
   }
 };
