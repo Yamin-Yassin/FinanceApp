@@ -10,15 +10,19 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {LoginPage} from './components/LoginPage';
 import {TransactionPopup} from './components/HomePage/components/TransactionPopup';
+import {connect} from 'react-redux';
 import {Provider} from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import {applyMiddleware, createStore} from 'redux';
 import rootSaga from './store/root.sagas';
-
+import {rootReducers} from './store/root.reducer';
 // Redux Variables
-const sagaMiddleware = createSagaMiddleware();
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
-sagaMiddleware.run(rootSaga);
+
+const mapStatetoProps = (state: any) => {
+  console.log('state: ', state);
+
+  return {state.transactions.transactions};
+};
 
 // Navigation Variables
 const Stack = createStackNavigator();
@@ -28,21 +32,19 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Provider store={store}>
-        <NavigationContainer>
-          <Stack.Navigator>
-            {SignedIn ? (
-              <>
-                <Stack.Screen name="Home" component={HomePage} />
-                <Stack.Screen name="Details" component={DetailsPage} />
-                <Stack.Screen name="Transaction" component={TransactionPopup} />
-              </>
-            ) : (
-              <Stack.Screen name="Login" component={LoginPage} />
-            )}
-          </Stack.Navigator>
-        </NavigationContainer>
-      </Provider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          {SignedIn ? (
+            <>
+              <Stack.Screen name="Home" component={HomePage} />
+              <Stack.Screen name="Details" component={DetailsPage} />
+              <Stack.Screen name="Transaction" component={TransactionPopup} />
+            </>
+          ) : (
+            <Stack.Screen name="Login" component={LoginPage} />
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
     </SafeAreaView>
   );
 };

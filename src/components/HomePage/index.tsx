@@ -11,23 +11,19 @@ import {FlatList} from 'react-native-gesture-handler';
 
 import Transaction from './components/Transaction';
 import {useNavigation} from '@react-navigation/native';
-import {useSelector} from 'react-redux';
-import {ReduxStateType} from '../../store/expenses/sagas';
+
 const w = Dimensions.get('window').width;
 
 export const HomePage = () => {
+  const avatar = require('../../assets/avatar.jpeg');
   const user = {
     name: 'Yamin Yassin',
-    avatar: require('../../assets/avatar.jpeg'),
-    balance: '1000,00',
+
+    initialValue: 1400,
   };
 
   const nav = useNavigation();
 
-  const reduxState = useSelector((state: any) => state);
-  //const dispatch = useDispatch(function);
-  console.log(reduxState);
-  // nao consigo remover os erros dentro quando uso o reduxState
   return (
     <View style={styles.container}>
       <View style={[styles.containerUser]}>
@@ -38,7 +34,7 @@ export const HomePage = () => {
           </Text>
         </View>
         <View>
-          <Image source={user.avatar} style={styles.avatar} />
+          <Image source={avatar} style={styles.avatar} />
         </View>
       </View>
 
@@ -47,7 +43,7 @@ export const HomePage = () => {
           <Text style={[styles.welcomeText]}>Account Balance:</Text>
         </View>
         <View>
-          <Text style={[styles.welcomeText]}>{user.name}</Text>
+          <Text style={[styles.welcomeText]}>{user.initialValue}</Text>
         </View>
       </View>
 

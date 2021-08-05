@@ -1,8 +1,8 @@
 import {all, call, put, takeEvery} from 'redux-saga/effects';
-import {getUsers} from '../api';
+import * as Api from '../api';
 
 function* fetchUsers() {
-  const users = yield call(getUsers);
+  const users = yield call(Api.getUser, id);
   console.log(users);
   yield put({type: 'USERS_RECIEVED', users});
 }
