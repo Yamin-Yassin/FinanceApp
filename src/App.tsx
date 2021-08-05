@@ -11,8 +11,16 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {LoginPage} from './components/LoginPage';
 import {TransactionPopup} from './components/HomePage/components/TransactionPopup';
 import {Provider} from 'react-redux';
-import {store} from './store/root.sagas';
+import createSagaMiddleware from 'redux-saga';
+import {applyMiddleware, createStore} from 'redux';
+import rootSaga from './store/root.sagas';
 
+// Redux Variables
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(rootSaga);
+
+// Navigation Variables
 const Stack = createStackNavigator();
 
 const App = () => {

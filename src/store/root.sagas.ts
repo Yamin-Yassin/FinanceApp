@@ -1,9 +1,5 @@
-import {createStore, applyMiddleware} from 'redux';
-import createSagaMiddleware from 'redux-saga';
-import rootSaga, {userReducer} from './expenses/sagas';
+import {all} from 'redux-saga/effects';
 
-const SagaMiddleware = createSagaMiddleware();
-
-export const store = createStore(userReducer, applyMiddleware(SagaMiddleware));
-
-SagaMiddleware.run(rootSaga);
+export default function* rootSaga() {
+  yield all([userSaga(), transactionSaga()]);
+}
