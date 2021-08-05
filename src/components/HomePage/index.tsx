@@ -11,7 +11,6 @@ import {FlatList} from 'react-native-gesture-handler';
 import {useSelector} from 'react-redux';
 
 import Transaction from './components/Transaction';
-import {ReduxStateType} from '../../store/root.reducer';
 import {useNavigation} from '@react-navigation/native';
 const w = Dimensions.get('window').width;
 
@@ -24,8 +23,7 @@ export const HomePage = () => {
 
   const nav = useNavigation();
 
-  const reduxState = useSelector((state: ReduxStateType) => state.balance);
-  console.log(reduxState);
+  //const reduxState = useSelector((state: ReduxStateType) => state.balance);
 
   // nao consigo remover os erros dentro quando uso o reduxState
   return (
@@ -47,7 +45,7 @@ export const HomePage = () => {
           <Text style={[styles.welcomeText]}>Account Balance:</Text>
         </View>
         <View>
-          <Text style={[styles.welcomeText]}>{reduxState.balance}</Text>
+          <Text style={[styles.welcomeText]}>{user.name}</Text>
         </View>
       </View>
 
@@ -58,7 +56,7 @@ export const HomePage = () => {
 
       <FlatList
         style={styles.transListContainer}
-        data={reduxState.transactions}
+        //data={reduxState.transactions}
         keyExtractor={item => item.value}
         renderItem={({item}) => <Transaction item={item} />}
       />

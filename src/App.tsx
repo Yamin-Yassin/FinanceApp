@@ -9,8 +9,6 @@ import {DetailsPage} from './components/DetailsPage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {LoginPage} from './components/LoginPage';
-import {Provider} from 'react-redux';
-import {store} from './store/root.reducer';
 import {TransactionPopup} from './components/HomePage/components/TransactionPopup';
 
 const Stack = createStackNavigator();
@@ -20,21 +18,19 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Provider store={store}>
-        <NavigationContainer>
-          <Stack.Navigator>
-            {SignedIn ? (
-              <>
-                <Stack.Screen name="Home" component={HomePage} />
-                <Stack.Screen name="Details" component={DetailsPage} />
-                <Stack.Screen name="Transaction" component={TransactionPopup} />
-              </>
-            ) : (
-              <Stack.Screen name="Login" component={LoginPage} />
-            )}
-          </Stack.Navigator>
-        </NavigationContainer>
-      </Provider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          {SignedIn ? (
+            <>
+              <Stack.Screen name="Home" component={HomePage} />
+              <Stack.Screen name="Details" component={DetailsPage} />
+              <Stack.Screen name="Transaction" component={TransactionPopup} />
+            </>
+          ) : (
+            <Stack.Screen name="Login" component={LoginPage} />
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
     </SafeAreaView>
   );
 };
