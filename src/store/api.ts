@@ -1,6 +1,4 @@
-import {Account} from './expenses/types';
-
-export const getUser = async (id: string) => {
+export const fetchUser = async (id: string) => {
   try {
     const res = await fetch(
       `https://dx-bootcamp-api.azurewebsites.net/api/Accounts/${id}`,
@@ -14,7 +12,7 @@ export const getUser = async (id: string) => {
   }
 };
 
-export const getUsers = async () => {
+export const fetchUsers = async () => {
   try {
     const res = await fetch(
       'https://dx-bootcamp-api.azurewebsites.net/api/Accounts/',

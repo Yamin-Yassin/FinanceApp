@@ -3,7 +3,7 @@ import * as Api from '../api';
 
 function* workerfetchUsers(): any {
   try {
-    const users = yield call(Api.getUsers);
+    const users = yield call(Api.fetchUsers);
     console.log('workerFetchUsers ', users);
 
     yield put({type: 'USERS_SUCCESS', users});
@@ -14,5 +14,5 @@ function* workerfetchUsers(): any {
 }
 
 export function* watcherFetchUsers(): any {
-  yield takeLatest('USERS_REQUEST', workerfetchUsers);
+  yield takeLatest('GET_USERS', workerfetchUsers);
 }

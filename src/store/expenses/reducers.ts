@@ -1,29 +1,24 @@
-import {Account, TransactionType} from './types';
-
-const initialState: Account = {
-  id: null,
-  name: 'yamin',
-  initialValue: 1000,
-  transactions: [],
+const initialState = {
+  users: [],
+  loading: false,
 };
 
-const transactionReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action) => {
   switch (action.type) {
-    case TransactionType.Expense:
+    case 'GET_USERS':
       return {
         ...state,
-        initialValue: state.initialValue - action.payload.transaction.value,
-        transactions: [...state.transactions, action.payload.transaction],
+        loading: true,
       };
-    case TransactionType.Income:
+    case 'USERS_SUCCESS':
       return {
         ...state,
-        initialValue: state.initialValue + action.payload.transaction.value,
-        transactions: [...state.transactions, action.payload.transaction],
+        users: [...state.users, action.users],
       };
+
     default:
       return state;
   }
 };
 
-export default transactionReducer;
+export default usersReducer;

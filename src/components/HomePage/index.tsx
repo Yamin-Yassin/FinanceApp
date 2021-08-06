@@ -8,13 +8,13 @@ import {
   Pressable,
 } from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
-
+import {connect} from 'react-redux';
 import Transaction from './components/Transaction';
 import {useNavigation} from '@react-navigation/native';
 
 const w = Dimensions.get('window').width;
 
-export const HomePage = () => {
+export const HomePage = ({users, loading, onRequestUsers}) => {
   const avatar = require('../../assets/avatar.jpeg');
   const user = {
     name: 'Yamin Yassin',
@@ -49,7 +49,7 @@ export const HomePage = () => {
 
       {/* ------ Transaction List -------*/}
       <View>
-        <Text> Filter by: </Text>
+        {loading ? <Text>LOADING DATA</Text> : <Text> DATA LOADED</Text>}
       </View>
 
       <FlatList
@@ -60,9 +60,7 @@ export const HomePage = () => {
       />
 
       {/* ------ Text inputs -------*/}
-      <Pressable
-        style={[styles.button]}
-        onPress={() => nav.navigate('Transaction')}>
+      <Pressable style={[styles.button]} onPress={() => onRequestUsers}>
         <Text>Ask for Payment</Text>
       </Pressable>
     </View>
@@ -147,3 +145,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 60,
   },
 });
+
+const mapStateToProps = state => {
+  console.log('mapStateToProps', state);
+  return {
+    users: state.users,
+    loading: state.loading,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onRequestUsers: () => dispatch({type: 'GET_USERS'}),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
