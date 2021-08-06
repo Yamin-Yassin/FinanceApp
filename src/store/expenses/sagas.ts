@@ -1,12 +1,18 @@
-import {all, call, put, takeEvery} from 'redux-saga/effects';
+import {call, put, takeLatest} from 'redux-saga/effects';
 import * as Api from '../api';
 
-function* fetchUsers() {
-  const users = yield call(Api.getUser, id);
-  console.log(users);
-  yield put({type: 'USERS_RECIEVED', users});
+function* workerfetchUsers(): any {
+  try {
+    const users = yield call(Api.getUsers);
+    console.log('workerFetchUsers ', users);
+
+    yield put({type: 'USERS_SUCCESS', users});
+  } catch (error) {
+    console.log('workerFetchUsers ', error);
+    yield put({type: 'USERS_FAILURE', error});
+  }
 }
 
-function* watchFetchUsers() {
-  yield takeEvery('USERS_REQUESTED', fetchUsers);
+export function* watcherFetchUsers(): any {
+  yield takeLatest('USERS_REQUEST', workerfetchUsers);
 }
