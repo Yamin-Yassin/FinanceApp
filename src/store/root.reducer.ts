@@ -1,11 +1,10 @@
-import {applyMiddleware, combineReducers, createStore} from 'redux';
-import thunk from 'redux-thunk';
-import transactionReducer from './expenses/reducers';
+import {combineReducers} from 'redux';
+import accountReducer from './expenses/reducers';
 
 const reducers = combineReducers({
-  balance: transactionReducer,
+  account: accountReducer,
 });
 
-export const store = createStore(reducers, {}, applyMiddleware(thunk));
+export default reducers;
 
 export type ReduxStateType = ReturnType<typeof reducers>;

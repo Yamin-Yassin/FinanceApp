@@ -5,13 +5,15 @@ import {StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {HomePage} from './components/HomePage';
+import {TransactionPopup} from './components/HomePage/components/TransactionPopup';
+import {LoginPage} from './components/LoginPage';
 import {DetailsPage} from './components/DetailsPage';
+
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {LoginPage} from './components/LoginPage';
+
 import {Provider} from 'react-redux';
-import {store} from './store/root.reducer';
-import {TransactionPopup} from './components/HomePage/components/TransactionPopup';
+import store from './store/store';
 
 const Stack = createStackNavigator();
 

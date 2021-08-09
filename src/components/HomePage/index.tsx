@@ -8,24 +8,22 @@ import {
   Pressable,
 } from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 import Transaction from './components/Transaction';
 import {ReduxStateType} from '../../store/root.reducer';
 import {useNavigation} from '@react-navigation/native';
+import * as actions from '../../store/expenses/actions';
+import {bindActionCreators} from 'redux';
+import {actionUserType} from '../../store/expenses/types';
+
 const w = Dimensions.get('window').width;
 
 export const HomePage = () => {
-  const user = {
-    name: 'Yamin Yassin',
-    avatar: require('../../assets/avatar.jpeg'),
-    balance: '1000,00',
-  };
-
   const nav = useNavigation();
 
-  const reduxState = useSelector((state: ReduxStateType) => state.balance);
-  console.log(reduxState);
+  const user = useSelector((state: ReduxStateType) => state.account);
+  const dispatch = useDispatch();
 
   // nao consigo remover os erros dentro quando uso o reduxState
   return (
@@ -38,7 +36,10 @@ export const HomePage = () => {
           </Text>
         </View>
         <View>
-          <Image source={user.avatar} style={styles.avatar} />
+          <Image
+            source={require('../../assets/avatar.jpeg')}
+            style={styles.avatar}
+          />
         </View>
       </View>
 
@@ -47,7 +48,7 @@ export const HomePage = () => {
           <Text style={[styles.welcomeText]}>Account Balance:</Text>
         </View>
         <View>
-          <Text style={[styles.welcomeText]}>{reduxState.balance}</Text>
+          <Text style={[styles.welcomeText]}>{user.initialValue}</Text>
         </View>
       </View>
 
@@ -58,15 +59,14 @@ export const HomePage = () => {
 
       <FlatList
         style={styles.transListContainer}
-        data={reduxState.transactions}
-        keyExtractor={item => item.value}
+        data={user.transactions}
         renderItem={({item}) => <Transaction item={item} />}
       />
 
       {/* ------ Text inputs -------*/}
       <Pressable
         style={[styles.button]}
-        onPress={() => nav.navigate('Transaction')}>
+        onPress={() => dispatch({type: actionUserType.userRequest})}>
         <Text>Ask for Payment</Text>
       </Pressable>
     </View>

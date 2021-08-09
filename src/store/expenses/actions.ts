@@ -1,7 +1,11 @@
-import {Action, ActionEnum, ActionPayload} from './types';
-import {Dispatch} from 'redux';
+import {
+  Transaction,
+  actionTransactionType,
+  TransactionType,
+  actionUserType,
+} from './types';
 import {createAction} from 'typesafe-actions';
-
+//import {Dispatch} from 'redux';
 /* export const addTransaction = (
   name: string,
   date: string,
@@ -39,7 +43,6 @@ export const removeTransaction = (
     });
   };
 };
- */
 
 export const addTransaction = createAction(
   ActionEnum.Add,
@@ -60,3 +63,37 @@ export const removeTransaction = createAction(
     value,
   }),
 )<ActionPayload>();
+ */
+
+const transactionfunc = (
+  id: string | null,
+  transactionType: TransactionType,
+  name: string | null,
+  value: number,
+  createdDate: string,
+) => ({
+  id,
+  transactionType,
+  name,
+  value,
+  createdDate,
+});
+
+export const expenseTransaction = createAction(
+  actionTransactionType.ExpenseRequest,
+  transactionfunc,
+)<Transaction>();
+
+export const incomeTransaction = createAction(
+  actionTransactionType.IncomeRequest,
+  transactionfunc,
+)<Transaction>();
+
+export const getUsers = createAction(actionUserType.userRequest);
+
+// export const getUser = createAction(
+//   actionUserType.userRequest,
+//   (id: string | null) => ({
+//     id,
+//   }),
+// );

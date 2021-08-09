@@ -1,40 +1,34 @@
-export enum ActionEnum {
-  Add = 'add',
-  Remove = 'remove',
+export enum TransactionType {
+  Income = 'Income',
+  Expense = 'Expense',
 }
 
-export type ActionPayload = {
-  name: string;
-  date: string;
-  description: string;
+export type Transaction = {
+  id: string | null;
+  transactionType: TransactionType;
+  name: string | null;
   value: number;
+  createdDate: string;
 };
 
-interface AddAction {
-  type: ActionEnum.Add;
-  payload: {
-    name: string;
-    date: string;
-    description: string;
-    value: number;
-  };
-}
-
-interface RemoveAction {
-  type: ActionEnum.Remove;
-  payload: {
-    name: string;
-    date: string;
-    description: string;
-    value: number;
-  };
-}
-export type Action = AddAction | RemoveAction;
-
-export type TransactionType = {
-  id: number;
-  name: string;
-  date: string;
-  description: string;
-  value: number;
+export type Account = {
+  id: string | null;
+  name: string | null;
+  initialValue: number;
+  transactions: Transaction[];
 };
+
+export enum actionUserType {
+  userRequest = 'USER_REQUEST',
+  userSuccess = 'USER_SUCCESS',
+  userFail = 'USER_FAILED',
+}
+
+export enum actionTransactionType {
+  ExpenseRequest = 'EXPENSE_REQUEST',
+  ExpenseSuccess = 'EXPENSE_SUCCESS',
+  ExpenseFailed = 'EXPENSE_FAILED',
+  IncomeRequest = 'INCOME_REQUEST',
+  IncomeSuccess = 'INCOME_SUCCESS',
+  IncomeFailed = 'INCOME_FAILED',
+}

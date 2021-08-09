@@ -1,41 +1,66 @@
-import {ActionType, getType} from 'typesafe-actions';
-import * as transactionActions from './actions';
+import {actionUserType} from './types';
 
 const initState = {
-  name: 'Yamin Yassin',
-  avatar: require('../../assets/avatar.jpeg'),
-  balance: 1000,
+  id: null,
+  name: null,
+  initialValue: 100,
   transactions: [],
+  loading: false,
+  error: false,
 };
 
-const transactionReducer = (
-  state = initState,
-  action: ActionType<typeof transactionActions>,
-) => {
+/* const transactionReducer = (state = initState, action) => {
   switch (action.type) {
-    case getType(transactionActions.addTransaction):
+    case actionUserType.userRequest:
       return {
         ...state,
-        balance: state.balance + action.payload.value,
+        balance: state.initialValue + action.payload.value,
         transactions: [...state.transactions, action.payload],
       };
     case getType(transactionActions.removeTransaction):
       return {
         ...state,
-        balance: state.balance - action.payload.value,
+        balance: state.initialValue - action.payload.value,
         transactions: [...state.transactions, action.payload],
       };
     default:
       return state;
   }
+}; */
+
+const accountReducer = (state = initState, action: any) => {
+  switch (action.type) {
+    case actionUserType.userRequest:
+      console.log('ACCOUNT REDUCER', actionUserType.userRequest);
+      return {
+        ...state,
+        loading: true,
+      };
+    case actionUserType.userSuccess:
+      console.log('ACCOUNT REDUCER', actionUserType.userSuccess);
+
+      const newState = {
+        ...state,
+        id: action.payload.id,
+        name: action.payload.name,
+        initialValue: action.payload.initialValue,
+        transactions: [...state.transactions, action.payload.transactions],
+        loading: false,
+        error: false,
+      };
+      console.log(newState);
+      return newState;
+
+    case actionUserType.userFail:
+      console.log('ACCOUNT REDUCER', actionUserType.userFail);
+
+      return {
+        ...state,
+        error: true,
+      };
+    default:
+      return {...state};
+  }
 };
 
-/* const transactionReducer = createReducer(initState).handleAction(
-  ActionEnum.Add, (state, action) => {
-    state,
-    balance: state.balance + action.payload.value,
-    transactions: [...state.transactions, action.payload],
-  };
-); */
-
-export default transactionReducer;
+export default accountReducer;
