@@ -1,8 +1,8 @@
 import {all} from 'redux-saga/effects';
-import {watchFetchUsers} from './expenses/sagas';
+import {watchFetchAccount} from './expenses/sagas';
 
 function* rootSaga() {
-  yield all([watchFetchUsers()]);
+  yield all([watchFetchAccount()]);
 }
 
 export default rootSaga;

@@ -54,7 +54,13 @@ export const HomePage = () => {
 
       {/* ------ Transaction List -------*/}
       <View>
-        <Text> Filter by: </Text>
+        <Text>
+          {user.loading ? (
+            <Text> loading </Text>
+          ) : (
+            <Text>loading completed </Text>
+          )}{' '}
+        </Text>
       </View>
 
       <FlatList
@@ -68,12 +74,7 @@ export const HomePage = () => {
       <Pressable
         style={[styles.button]}
         onPress={() =>
-          dispatch({
-            type: actionAccountType.Request,
-            payload: {
-              id: user.id,
-            },
-          })
+          dispatch({type: actionAccountType.Request, payload: {id: user.id}})
         }>
         <Text>Ask for Payment</Text>
       </Pressable>

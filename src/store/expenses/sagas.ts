@@ -31,11 +31,6 @@ export function* watchFetchUsers() {
 
 // ------------------ ACCOUNT SAGA
 
-export function* watchFetchAccount() {
-  console.log('watchFetchAccout');
-  yield takeLatest(actionUsersType.Request, workFetchAccount);
-}
-
 function* workFetchAccount(action: any) {
   console.log('workFetchAccount Started!', action);
   const account = yield call(API.fetchAccount, action.payload.id);
@@ -54,4 +49,8 @@ function* workFetchAccount(action: any) {
       },
     });
   }
+}
+export function* watchFetchAccount() {
+  console.log('watchFetchAccout');
+  yield takeLatest(actionUsersType.Request, workFetchAccount);
 }
