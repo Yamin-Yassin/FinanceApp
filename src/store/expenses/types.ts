@@ -25,9 +25,9 @@ export enum actionUsersType {
 }
 
 export enum actionAccountType {
-  Request = 'USERS_REQUEST',
-  Success = 'USERS_SUCCESS',
-  Fail = 'USERS_FAILED',
+  Request = 'ACCOUNT_REQUEST',
+  Success = 'ACCOUNT_SUCCESS',
+  Fail = 'ACCOUNT_FAILED',
 }
 
 export enum actionTransactionType {
