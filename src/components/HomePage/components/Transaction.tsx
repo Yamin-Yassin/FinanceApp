@@ -4,6 +4,7 @@ import {View, Text, Image, StyleSheet, Pressable} from 'react-native';
 
 export default function Transaction(props: any) {
   const nav = useNavigation();
+  console.log('TRANSACTION ', props);
 
   return (
     <Pressable onPress={() => nav.navigate('Details', props.item)}>
@@ -17,7 +18,7 @@ export default function Transaction(props: any) {
           </View>
           <View style={styles.transName}>
             <Text>{props.item.name}</Text>
-            <Text>{props.item.date}</Text>
+            <Text>{props.item.createdDate}</Text>
           </View>
         </View>
 

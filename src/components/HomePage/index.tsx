@@ -13,8 +13,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import Transaction from './components/Transaction';
 import {ReduxStateType} from '../../store/root.reducer';
 import {useNavigation} from '@react-navigation/native';
-import * as actions from '../../store/expenses/actions';
-import {bindActionCreators} from 'redux';
+
 import {actionUserType} from '../../store/expenses/types';
 
 const w = Dimensions.get('window').width;
@@ -60,6 +59,7 @@ export const HomePage = () => {
       <FlatList
         style={styles.transListContainer}
         data={user.transactions}
+        keyExtractor={item => item.id}
         renderItem={({item}) => <Transaction item={item} />}
       />
 
