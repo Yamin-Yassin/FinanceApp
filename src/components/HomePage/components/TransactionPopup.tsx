@@ -1,13 +1,11 @@
 import React, {useState} from 'react';
 import {View, Text, Pressable, StyleSheet, TextInput} from 'react-native';
 import {useDispatch} from 'react-redux';
-import {bindActionCreators} from 'redux';
 import * as actions from '../../../store/expenses/actions';
 import {TransactionType} from '../../../store/expenses/types';
 
 export const TransactionPopup = () => {
   const dispatch = useDispatch();
-  const actionCreators = bindActionCreators(actions, dispatch);
 
   const [name, setName] = useState('');
   const [date, setDate] = useState('');
@@ -15,8 +13,7 @@ export const TransactionPopup = () => {
   const [amount, setAmount] = useState('');
 
   const DispatchAction = () => {
-    actionCreators.getUsers();
-    // addTransaction(null, TransactionType.Income, null, +amount, 'date');
+    console.log('hi');
   };
 
   return (
