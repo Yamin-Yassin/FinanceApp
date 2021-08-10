@@ -28,3 +28,30 @@ export function* watchFetchUsers() {
   console.log('watchFetchUsers');
   yield takeLatest(actionUsersType.Request, workFetchUsers);
 }
+
+// ------------------ ACCOUNT SAGA
+
+export function* watchFetchAccount() {
+  console.log('watchFetchAccout');
+  yield takeLatest(actionUsersType.Request, workFetchAccount);
+}
+
+function* workFetchAccount(action: any) {
+  console.log('workFetchAccount Started!', action);
+  const account = yield call(API.fetchAccount, action.payload.id);
+  try {
+    console.log('workFetchAccount SUCCESS');
+    yield put({
+      type: actionUsersType.Success,
+      payload: account,
+    });
+  } catch (e) {
+    console.error('workFetchUsers FAILED', e);
+    yield put({
+      type: actionUsersType.Success,
+      payload: {
+        error: e,
+      },
+    });
+  }
+}
