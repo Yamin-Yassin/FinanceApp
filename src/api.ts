@@ -12,7 +12,8 @@ export const fetchUsers = async () => {
   }
 };
 
-export const fetchUser = async (id: string) => {
+export const fetchAccount = async (id: string) => {
+  console.log('API FETCH ACCOUNT');
   try {
     const res = await fetch(
       `https://dx-bootcamp-api.azurewebsites.net/api/Accounts/${id}`,
