@@ -4,7 +4,6 @@ import {View, Text, Image, StyleSheet, Pressable} from 'react-native';
 
 export default function Transaction(props: any) {
   const nav = useNavigation();
-  console.log('TRANSACTION ', props);
 
   return (
     <Pressable onPress={() => nav.navigate('Details', props.item)}>
