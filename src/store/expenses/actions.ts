@@ -2,7 +2,7 @@ import {
   Transaction,
   actionTransactionType,
   TransactionType,
-  actionUserType,
+  actionUsersType,
 } from './types';
 import {createAction} from 'typesafe-actions';
 //import {Dispatch} from 'redux';
@@ -89,7 +89,7 @@ export const incomeTransaction = createAction(
   transactionfunc,
 )<Transaction>();
 
-export const getUsers = createAction(actionUserType.userRequest);
+export const getUsers = createAction(actionUsersType.Request);
 
 // export const getUser = createAction(
 //   actionUserType.userRequest,

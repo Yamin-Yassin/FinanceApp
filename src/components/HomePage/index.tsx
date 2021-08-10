@@ -14,7 +14,7 @@ import Transaction from './components/Transaction';
 import {ReduxStateType} from '../../store/root.reducer';
 import {useNavigation} from '@react-navigation/native';
 
-import {actionUserType} from '../../store/expenses/types';
+import {actionUsersType} from '../../store/expenses/types';
 
 const w = Dimensions.get('window').width;
 
@@ -66,7 +66,7 @@ export const HomePage = () => {
       {/* ------ Text inputs -------*/}
       <Pressable
         style={[styles.button]}
-        onPress={() => dispatch({type: actionUserType.userRequest})}>
+        onPress={() => dispatch({type: actionUsersType.Request})}>
         <Text>Ask for Payment</Text>
       </Pressable>
     </View>

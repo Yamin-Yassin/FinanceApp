@@ -1,4 +1,4 @@
-import {actionUserType} from './types';
+import {actionUsersType} from './types';
 
 const initState = {
   id: '9f7b5b90-8f9d-4ace-b05e-6022b4b75bd3',
@@ -38,16 +38,16 @@ const initState = {
 
 const accountReducer = (state = initState, action: any) => {
   switch (action.type) {
-    case actionUserType.userRequest:
-      console.log('ACCOUNT REDUCER', actionUserType.userRequest);
+    case actionUsersType.Request:
+      console.log('ACCOUNT REDUCER', actionUsersType.Request);
       return {
         ...state,
         loading: true,
       };
-    case actionUserType.userSuccess:
+    case actionUsersType.Success:
       const users = action.payload.users;
 
-      console.log('ACCOUNT REDUCER', actionUserType.userSuccess);
+      console.log('ACCOUNT REDUCER', actionUsersType.Success);
 
       const newState = {
         ...state,
@@ -62,8 +62,8 @@ const accountReducer = (state = initState, action: any) => {
       console.log(newState);
       return newState;
 
-    case actionUserType.userFail:
-      console.log('ACCOUNT REDUCER', actionUserType.userFail);
+    case actionUsersType.Fail:
+      console.log('ACCOUNT REDUCER', actionUsersType.Fail);
 
       return {
         ...state,

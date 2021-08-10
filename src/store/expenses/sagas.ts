@@ -1,6 +1,6 @@
 import * as API from '../../api';
 import {call, put, takeLatest} from 'redux-saga/effects';
-import {actionUserType} from './types';
+import {actionUsersType} from './types';
 
 function* workFetchUsers() {
   console.log('workFetchUsers Started!');
@@ -8,7 +8,7 @@ function* workFetchUsers() {
   try {
     console.log('workFetchUsers Feched users', users);
     yield put({
-      type: actionUserType.userSuccess,
+      type: actionUsersType.Success,
       payload: {
         users: users,
       },
@@ -16,7 +16,7 @@ function* workFetchUsers() {
   } catch (e) {
     console.error('workFetchUsers Failed', e);
     yield put({
-      type: actionUserType.userSuccess,
+      type: actionUsersType.Success,
       payload: {
         error: e,
       },
@@ -26,5 +26,5 @@ function* workFetchUsers() {
 
 export function* watchFetchUsers() {
   console.log('watchFetchUsers');
-  yield takeLatest(actionUserType.userRequest, workFetchUsers);
+  yield takeLatest(actionUsersType.Request, workFetchUsers);
 }

@@ -18,10 +18,16 @@ export type Account = {
   transactions: Transaction[];
 };
 
-export enum actionUserType {
-  userRequest = 'USER_REQUEST',
-  userSuccess = 'USER_SUCCESS',
-  userFail = 'USER_FAILED',
+export enum actionUsersType {
+  Request = 'USERS_REQUEST',
+  Success = 'USERS_SUCCESS',
+  Fail = 'USERS_FAILED',
+}
+
+export enum actionAccountType {
+  Request = 'USERS_REQUEST',
+  Success = 'USERS_SUCCESS',
+  Fail = 'USERS_FAILED',
 }
 
 export enum actionTransactionType {
