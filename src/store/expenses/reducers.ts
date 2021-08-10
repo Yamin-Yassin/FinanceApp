@@ -1,7 +1,7 @@
-import {actionAccountType} from './types';
+import {actionAccountType, actionUsersType} from './types';
 
 const initState = {
-  id: '9f7b5b90-8f9d-4ace-b05e-6022b4b75bd3',
+  id: null,
   name: null,
   initialValue: 0,
   transactions: [
@@ -36,7 +36,7 @@ const initState = {
   }
 }; */
 
-const accountReducer = (state = initState, action: any) => {
+export const accountReducer = (state = initState, action: any) => {
   switch (action.type) {
     case actionAccountType.Request:
       console.log('ACCOUNT REDUCER', actionAccountType.Request);
@@ -72,4 +72,37 @@ const accountReducer = (state = initState, action: any) => {
   }
 };
 
-export default accountReducer;
+export const usersReducer = (state = initState, action: any) => {
+  switch (action.type) {
+    case actionUsersType.Request:
+      console.log('USERS REDUCER', actionUsersType.Request);
+      return {
+        ...state,
+        loading: true,
+      };
+    case actionUsersType.Success:
+      console.log('USERS REDUCER', actionUsersType.Success);
+
+      const newState = {
+        ...state,
+        id: action.payload.id,
+        name: action.payload.name,
+        initialValue: action.payload.initialValue,
+        transactions: [...state.transactions, action.payload.transactions],
+        loading: false,
+        error: false,
+      };
+      console.log(newState);
+      return newState;
+
+    case actionUsersType.Fail:
+      console.log('USERS REDUCER', actionUsersType.Fail);
+
+      return {
+        ...state,
+        error: true,
+      };
+    default:
+      return {...state};
+  }
+};

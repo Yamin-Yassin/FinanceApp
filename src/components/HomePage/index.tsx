@@ -15,7 +15,6 @@ import {ReduxStateType} from '../../store/root.reducer';
 import {useNavigation} from '@react-navigation/native';
 
 import {actionAccountType, actionUsersType} from '../../store/expenses/types';
-import {getAccount} from '../../store/expenses/actions';
 
 const w = Dimensions.get('window').width;
 
@@ -23,6 +22,7 @@ export const HomePage = () => {
   const nav = useNavigation();
 
   const user = useSelector((state: ReduxStateType) => state.account);
+
   const dispatch = useDispatch();
 
   // nao consigo remover os erros dentro quando uso o reduxState
@@ -63,18 +63,21 @@ export const HomePage = () => {
         </Text>
       </View>
 
-      <FlatList
+      {/* <FlatList
         style={styles.transListContainer}
         data={user.transactions}
         keyExtractor={item => item.id}
         renderItem={({item}) => <Transaction item={item} />}
-      />
+      /> */}
 
       {/* ------ Text inputs -------*/}
       <Pressable
         style={[styles.button]}
         onPress={() =>
-          dispatch({type: actionAccountType.Request, payload: {id: user.id}})
+          dispatch({
+            type: actionAccountType.Request,
+            payload: {id: '9f7b5b90-8f9d-4ace-b05e-6022b4b75bd3'},
+          })
         }>
         <Text>Ask for Payment</Text>
       </Pressable>
