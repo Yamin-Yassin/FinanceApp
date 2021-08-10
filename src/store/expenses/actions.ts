@@ -3,8 +3,10 @@ import {
   actionTransactionType,
   TransactionType,
   actionUsersType,
+  actionAccountType,
 } from './types';
 import {createAction} from 'typesafe-actions';
+
 //import {Dispatch} from 'redux';
 /* export const addTransaction = (
   name: string,
@@ -91,9 +93,9 @@ export const incomeTransaction = createAction(
 
 export const getUsers = createAction(actionUsersType.Request);
 
-// export const getUser = createAction(
-//   actionUserType.userRequest,
-//   (id: string | null) => ({
-//     id,
-//   }),
-// );
+export const getAccount = createAction(
+  actionAccountType.Request,
+  (id: string | null) => ({
+    id,
+  }),
+);
