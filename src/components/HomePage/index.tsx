@@ -15,12 +15,18 @@ import {ReduxStateType} from '../../store/root.reducer';
 import {useNavigation} from '@react-navigation/native';
 
 import {actionAccountType, actionUsersType} from '../../store/expenses/types';
+import {postTransactions} from '../../api';
 
 const w = Dimensions.get('window').width;
 
 export const HomePage = () => {
   const nav = useNavigation();
-
+  const post = postTransactions(
+    '9f7b5b90-8f9d-4ace-b05e-6022b4b75bd3',
+    'Funcionaaa',
+    100,
+  );
+  console.log(post);
   const user = useSelector((state: ReduxStateType) => state.account);
 
   const dispatch = useDispatch();
