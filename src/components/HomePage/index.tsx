@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import {
   View,
   StyleSheet,
@@ -14,31 +14,32 @@ import Transaction from './components/Transaction';
 import {ReduxStateType} from '../../store/root.reducer';
 import {useNavigation} from '@react-navigation/native';
 
-import {actionAccountType, actionUsersType} from '../../store/expenses/types';
-import {postTransactions} from '../../api';
+import {actionAccountType} from '../../store/expenses/types';
 
 const w = Dimensions.get('window').width;
 
 export const HomePage = () => {
-  const nav = useNavigation();
-  const post = postTransactions(
-    '9f7b5b90-8f9d-4ace-b05e-6022b4b75bd3',
-    'Funcionaaa',
-    100,
-  );
-  console.log(post);
-  const user = useSelector((state: ReduxStateType) => state.account);
+  const account = useSelector((state: ReduxStateType) => state.account);
 
   const dispatch = useDispatch();
 
-  // nao consigo remover os erros dentro quando uso o reduxState
+  useEffect(() => {
+    dispatch({
+      type: actionAccountType.Request,
+      payload: {id: '9f7b5b90-8f9d-4ace-b05e-6022b4b75bd3'},
+    });
+  }, []);
+
+  console.log(account.transactions);
+  const nav = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={[styles.containerUser]}>
         <View>
           <Text style={styles.welcomeText}>Welcome Back,</Text>
           <Text style={[styles.welcomeText, styles.welcomeName]}>
-            {user.name}
+            {account.name}
           </Text>
         </View>
         <View>
@@ -54,37 +55,32 @@ export const HomePage = () => {
           <Text style={[styles.welcomeText]}>Account Balance:</Text>
         </View>
         <View>
-          <Text style={[styles.welcomeText]}>{user.initialValue}</Text>
+          <Text style={[styles.welcomeText]}>{account.initialValue}</Text>
         </View>
       </View>
 
       {/* ------ Transaction List -------*/}
       <View>
         <Text>
-          {user.loading ? (
+          {account.loading ? (
             <Text> loading </Text>
           ) : (
             <Text>loading completed </Text>
-          )}{' '}
+          )}
         </Text>
       </View>
 
-      {/* <FlatList
+      <FlatList
         style={styles.transListContainer}
-        data={user.transactions}
+        data={account.transactions}
         keyExtractor={item => item.id}
         renderItem={({item}) => <Transaction item={item} />}
-      /> */}
+      />
 
       {/* ------ Text inputs -------*/}
       <Pressable
         style={[styles.button]}
-        onPress={() =>
-          dispatch({
-            type: actionAccountType.Request,
-            payload: {id: '9f7b5b90-8f9d-4ace-b05e-6022b4b75bd3'},
-          })
-        }>
+        onPress={() => nav.navigate('Transaction')}>
         <Text>Ask for Payment</Text>
       </Pressable>
     </View>
@@ -127,7 +123,7 @@ const styles = StyleSheet.create({
   },
 
   transListContainer: {
-    height: 250,
+    height: 400,
   },
 
   inputContainer: {

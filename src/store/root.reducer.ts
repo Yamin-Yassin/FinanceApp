@@ -1,9 +1,10 @@
 import {combineReducers} from 'redux';
-import {accountReducer, usersReducer} from './expenses/reducers';
+import {accountReducer, expenseReducer} from './expenses/reducers';
 
 const reducers = combineReducers({
   account: accountReducer,
-  users: usersReducer,
+
+  transaction: expenseReducer,
 });
 
 export default reducers;

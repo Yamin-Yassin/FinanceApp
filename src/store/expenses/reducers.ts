@@ -1,40 +1,40 @@
-import {actionAccountType, actionUsersType} from './types';
+import {actionAccountType, actionExpenseType, actionUsersType} from './types';
 
 const initState = {
   id: null,
   name: null,
   initialValue: 0,
-  transactions: [
-    {
-      createDate: '2021-02-22T17:54:05.8534634+00:00',
-      id: '9999',
-      name: 'uberrr',
-      transactionType: 'Income',
-      value: 10,
-    },
-  ],
+  transactions: [],
   loading: false,
   error: false,
 };
 
-/* const transactionReducer = (state = initState, action) => {
+export const expenseReducer = (state = initState, action) => {
   switch (action.type) {
-    case actionUserType.userRequest:
+    case actionExpenseType.Request:
       return {
         ...state,
-        balance: state.initialValue + action.payload.value,
-        transactions: [...state.transactions, action.payload],
+        loading: true,
+        error: false,
       };
-    case getType(transactionActions.removeTransaction):
+    case actionExpenseType.Success:
       return {
         ...state,
         balance: state.initialValue - action.payload.value,
         transactions: [...state.transactions, action.payload],
+        loading: false,
+        error: false,
+      };
+    case actionExpenseType.Fail:
+      return {
+        ...state,
+        loading: false,
+        error: true,
       };
     default:
       return state;
   }
-}; */
+};
 
 export const accountReducer = (state = initState, action: any) => {
   switch (action.type) {
@@ -54,7 +54,7 @@ export const accountReducer = (state = initState, action: any) => {
         id: action.payload.id,
         name: action.payload.name,
         initialValue: action.payload.initialValue,
-        transactions: [...state.transactions, action.payload.transactions],
+        transactions: action.payload.transactions,
         loading: false,
         error: false,
       };
@@ -67,41 +67,6 @@ export const accountReducer = (state = initState, action: any) => {
         error: true,
       };
 
-    default:
-      return {...state};
-  }
-};
-
-export const usersReducer = (state = initState, action: any) => {
-  switch (action.type) {
-    case actionUsersType.Request:
-      console.log('USERS REDUCER', actionUsersType.Request);
-      return {
-        ...state,
-        loading: true,
-      };
-    case actionUsersType.Success:
-      console.log('USERS REDUCER', actionUsersType.Success);
-
-      const newState = {
-        ...state,
-        id: action.payload.id,
-        name: action.payload.name,
-        initialValue: action.payload.initialValue,
-        transactions: [...state.transactions, action.payload.transactions],
-        loading: false,
-        error: false,
-      };
-      console.log(newState);
-      return newState;
-
-    case actionUsersType.Fail:
-      console.log('USERS REDUCER', actionUsersType.Fail);
-
-      return {
-        ...state,
-        error: true,
-      };
     default:
       return {...state};
   }

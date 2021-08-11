@@ -1,33 +1,6 @@
 import * as API from '../../api';
 import {call, put, takeLatest} from 'redux-saga/effects';
-import {actionAccountType, actionUsersType} from './types';
-
-function* workFetchUsers() {
-  console.log('workFetchUsers Started!');
-  const users = yield call(API.fetchUsers);
-  try {
-    console.log('workFetchUsers Feched users', users);
-    yield put({
-      type: actionUsersType.Success,
-      payload: {
-        users: users,
-      },
-    });
-  } catch (e) {
-    console.error('workFetchUsers Failed', e);
-    yield put({
-      type: actionUsersType.Success,
-      payload: {
-        error: e,
-      },
-    });
-  }
-}
-
-export function* watchFetchUsers() {
-  console.log('watchFetchUsers');
-  yield takeLatest(actionUsersType.Request, workFetchUsers);
-}
+import {actionAccountType, actionExpenseType} from './types';
 
 // ------------------ ACCOUNT SAGA
 
@@ -41,9 +14,9 @@ function* workFetchAccount(action: any) {
       payload: account,
     });
   } catch (e) {
-    console.error('workFetchUsers FAILED', e);
+    console.error('workFetchAccount FAILED', e);
     yield put({
-      type: actionAccountType.Success,
+      type: actionAccountType.Fail,
       payload: {
         error: e,
       },
@@ -53,4 +26,36 @@ function* workFetchAccount(action: any) {
 export function* watchFetchAccount() {
   console.log('watchFetchAccout');
   yield takeLatest(actionAccountType.Request, workFetchAccount);
+}
+
+// ---------------- TRANSACTION SAGA
+
+function* workFetchTransaction(action: any) {
+  console.log('workFetchTransaction Started!', action);
+
+  const transaction = yield call(
+    API.postTransactions,
+    action.payload.id,
+    action.payload.name,
+    action.payload.value,
+  );
+  try {
+    console.log('workFetchTransaction SUCCESS');
+    yield put({
+      type: actionExpenseType.Success,
+      payload: transaction,
+    });
+  } catch (e) {
+    console.error('workFetchTransaction FAILED', e);
+    yield put({
+      type: actionExpenseType.Success,
+      payload: {
+        error: e,
+      },
+    });
+  }
+}
+export function* watchFetchTransaction() {
+  console.log('watchFetchTransaction');
+  yield takeLatest(actionExpenseType.Request, workFetchTransaction);
 }
