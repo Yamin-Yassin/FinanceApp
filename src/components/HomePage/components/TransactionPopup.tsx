@@ -12,9 +12,7 @@ export const TransactionPopup = () => {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
 
-  const DispatchAction = () => {
-    console.log('hi');
-  };
+  const DispatchAction = () => {};
 
   return (
     <>
