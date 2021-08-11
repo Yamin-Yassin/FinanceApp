@@ -2,7 +2,6 @@ import {
   Transaction,
   actionExpenseType,
   TransactionType,
-  actionUsersType,
   actionAccountType,
   actionIncomeType,
 } from './types';
@@ -31,8 +30,6 @@ export const incomeTransaction = createAction(
   actionIncomeType.Request,
   transactionfunc,
 )<Transaction>();
-
-export const getUsers = createAction(actionUsersType.Request);
 
 export const getAccount = createAction(
   actionAccountType.Request,
