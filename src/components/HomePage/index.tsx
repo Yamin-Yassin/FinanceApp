@@ -29,11 +29,6 @@ export const HomePage = () => {
     });
   };
 
-  useEffect(() => {
-    getAccount();
-    console.log(account);
-  }, []);
-
   useFocusEffect(
     React.useCallback(() => {
       getAccount();
