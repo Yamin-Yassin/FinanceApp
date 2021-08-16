@@ -12,7 +12,7 @@ import {useSelector, useDispatch} from 'react-redux';
 
 import Transaction from './components/Transaction';
 import {ReduxStateType} from '../../store/root.reducer';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 
 import {actionAccountType} from '../../store/expenses/types';
 
@@ -31,9 +31,16 @@ export const HomePage = () => {
 
   useEffect(() => {
     getAccount();
+    console.log(account);
   }, []);
 
-  console.log(account.transactions);
+  useFocusEffect(
+    React.useCallback(() => {
+      getAccount();
+    }, []),
+  );
+
+  console.log(account);
   const nav = useNavigation();
 
   return (
