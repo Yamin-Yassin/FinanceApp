@@ -20,14 +20,17 @@ const w = Dimensions.get('window').width;
 
 export const HomePage = () => {
   const account = useSelector((state: ReduxStateType) => state.account);
-
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  const getAccount = () => {
     dispatch({
       type: actionAccountType.Request,
       payload: {id: '9f7b5b90-8f9d-4ace-b05e-6022b4b75bd3'},
     });
+  };
+
+  useEffect(() => {
+    getAccount();
   }, []);
 
   console.log(account.transactions);
@@ -75,6 +78,9 @@ export const HomePage = () => {
         data={account.transactions}
         keyExtractor={item => item.id}
         renderItem={({item}) => <Transaction item={item} />}
+        extraData={account.transactions}
+        onRefresh={() => getAccount()}
+        refreshing={account.loading}
       />
 
       {/* ------ Text inputs -------*/}

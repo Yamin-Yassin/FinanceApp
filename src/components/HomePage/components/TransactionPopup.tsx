@@ -1,18 +1,22 @@
+import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {View, Text, Pressable, StyleSheet, TextInput} from 'react-native';
 import {useDispatch} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import * as actions from '../../../store/expenses/actions';
-import {TransactionType} from '../../../store/expenses/types';
 
 export const TransactionPopup = () => {
   const dispatch = useDispatch();
+  const nav = useNavigation();
 
   const [name, setName] = useState('');
   const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
-
-  const DispatchAction = () => {};
+  const {expenseTransaction} = bindActionCreators(actions, dispatch);
+  const DispatchAction = () => {
+    expenseTransaction('9f7b5b90-8f9d-4ace-b05e-6022b4b75bd3', name, +amount);
+  };
 
   return (
     <>
@@ -57,7 +61,12 @@ export const TransactionPopup = () => {
             value={amount}
           />
         </View>
-        <Pressable style={styles.button} onPress={() => DispatchAction()}>
+        <Pressable
+          style={styles.button}
+          onPress={() => {
+            DispatchAction();
+            nav.goBack();
+          }}>
           <Text>Add</Text>
         </Pressable>
       </View>

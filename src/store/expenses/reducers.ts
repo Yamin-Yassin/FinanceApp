@@ -1,4 +1,4 @@
-import {actionAccountType, actionExpenseType, actionUsersType} from './types';
+import {actionAccountType, actionExpenseType} from './types';
 
 const initState = {
   id: null,
@@ -54,7 +54,7 @@ export const accountReducer = (state = initState, action: any) => {
         id: action.payload.id,
         name: action.payload.name,
         initialValue: action.payload.initialValue,
-        transactions: action.payload.transactions,
+        transactions: action.payload.transactions.reverse(),
         loading: false,
         error: false,
       };

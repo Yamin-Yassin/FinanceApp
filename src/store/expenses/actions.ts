@@ -9,16 +9,12 @@ import {createAction} from 'typesafe-actions';
 
 const transactionfunc = (
   id: string | null,
-  transactionType: TransactionType,
   name: string | null,
   value: number,
-  createdDate: string,
 ) => ({
   id,
-  transactionType,
   name,
   value,
-  createdDate,
 });
 
 export const expenseTransaction = createAction(

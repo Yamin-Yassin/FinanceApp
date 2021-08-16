@@ -114,7 +114,6 @@
 				B4293A0B4191DC54F471FAAC /* Pods-FinanceApp-FinanceAppTests.debug.xcconfig */,
 				56A34A761662592EA1AA3E57 /* Pods-FinanceApp-FinanceAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -485,6 +484,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 33ZC9AJYF2;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = FinanceApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -511,6 +511,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 33ZC9AJYF2;
 				INFOPLIST_FILE = FinanceApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

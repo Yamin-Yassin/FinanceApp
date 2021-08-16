@@ -32,14 +32,9 @@ export const DetailsPage = () => {
 
       <View style={styles.bottomContainer}>
         <View style={[styles.section]}>
-          <Text>Description</Text>
-        </View>
-        <Text style={[styles.textName]}>{item.description}</Text>
-
-        <View style={[styles.section]}>
           <Text>Transaction Date:</Text>
         </View>
-        <Text style={[styles.textName]}>{item.date}</Text>
+        <Text style={[styles.textName]}>{item.createdDate.slice(0, 9)}</Text>
       </View>
     </View>
   );

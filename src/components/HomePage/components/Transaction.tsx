@@ -17,7 +17,7 @@ export default function Transaction(props: any) {
           </View>
           <View style={styles.transName}>
             <Text>{props.item.name}</Text>
-            <Text>{props.item.createdDate}</Text>
+            <Text>{props.item.createdDate.slice(0, 16)}</Text>
           </View>
         </View>
 
