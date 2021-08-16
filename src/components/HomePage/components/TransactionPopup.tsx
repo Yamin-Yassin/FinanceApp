@@ -14,14 +14,10 @@ export const TransactionPopup = () => {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
   const {expenseTransaction} = bindActionCreators(actions, dispatch);
-
   const DispatchAction = () => {
     expenseTransaction('9f7b5b90-8f9d-4ace-b05e-6022b4b75bd3', name, +amount);
   };
 
-  const waiting = () => {
-    setTimeout(() => {}, 3000);
-  };
   return (
     <>
       <View style={styles.container}>
@@ -69,7 +65,6 @@ export const TransactionPopup = () => {
           style={styles.button}
           onPress={() => {
             DispatchAction();
-            waiting();
             nav.goBack();
           }}>
           <Text>Add</Text>
